@@ -1,6 +1,6 @@
 import htmlBlogModel from "../models/htmlBlog.models.js";
 
-export const getHtmlBlog = async (req, res) => {
+export const getAllBlog = async (req, res) => {
   try {
     const allUsers = await htmlBlogModel.find();
     return res.status(200).json(allUsers);
@@ -9,8 +9,26 @@ export const getHtmlBlog = async (req, res) => {
   }
 };
 
+export const getHtmlBlogOnly = async (req, res) => {
+  try {
+    const allUsers = await htmlBlogModel.find({ contentType: "HTML" });
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+export const getCssBlogOnly = async (req, res) => {
+  try {
+    const allUsers = await htmlBlogModel.find({ contentType: "CSS" });
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 export const postHtmlBlog = async (req, res) => {
   const newHtmlBlog = new htmlBlogModel({
+    contentType: req.body.contentType,
     heading: req.body.heading,
     content: req.body.content,
     example: req.body.example,
@@ -28,12 +46,12 @@ export const postHtmlBlog = async (req, res) => {
 // Update blog data by ID
 export const putHtmlBlog = async (req, res) => {
   const { id } = req.params; // Get the blog post ID from the URL params
-  const { heading, content, example, menuName } = req.body; // Get the updated data from the body
+  const { contentType, heading, content, example, menuName } = req.body; // Get the updated data from the body
 
   try {
     const updatedBlog = await htmlBlogModel.findByIdAndUpdate(
       id,
-      { heading, content, example, menuName },
+      { contentType, heading, content, example, menuName },
       { new: true } // Return the updated document
     );
 

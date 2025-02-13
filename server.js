@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 // app.use("/users", userRouter);
-app.use("/htmlBlog", htmlBlogRouter);
+app.use("/blog", htmlBlogRouter);
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
