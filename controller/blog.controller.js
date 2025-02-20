@@ -1,9 +1,9 @@
-import htmlBlogModel from "../models/htmlBlog.models.js";
+import htmlBlogModel from "../models/blog.models.js";
 
 export const getAllBlog = async (req, res) => {
   try {
-    const allUsers = await htmlBlogModel.find();
-    return res.status(200).json(allUsers);
+    const data = await htmlBlogModel.find();
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
@@ -11,22 +11,68 @@ export const getAllBlog = async (req, res) => {
 
 export const getHtmlBlogOnly = async (req, res) => {
   try {
-    const allUsers = await htmlBlogModel.find({ contentType: "HTML" });
-    return res.status(200).json(allUsers);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
-export const getCssBlogOnly = async (req, res) => {
-  try {
-    const allUsers = await htmlBlogModel.find({ contentType: "CSS" });
-    return res.status(200).json(allUsers);
+    const data = await htmlBlogModel.find({ contentType: "HTML" });
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 };
 
-export const postHtmlBlog = async (req, res) => {
+export const getCssBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "CSS" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getJavascriptBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "Javascript" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getBootstrapBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "Bootstrap" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getReactJsBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "ReactJs" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getSQLBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "SQL" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const getJavaBlogOnly = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "Java" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+export const postBlog = async (req, res) => {
   const newHtmlBlog = new htmlBlogModel({
     contentType: req.body.contentType,
     heading: req.body.heading,
@@ -44,7 +90,7 @@ export const postHtmlBlog = async (req, res) => {
 };
 
 // Update blog data by ID
-export const putHtmlBlog = async (req, res) => {
+export const putBlog = async (req, res) => {
   const { id } = req.params; // Get the blog post ID from the URL params
   const { contentType, heading, content, example, menuName } = req.body; // Get the updated data from the body
 
@@ -66,7 +112,7 @@ export const putHtmlBlog = async (req, res) => {
 };
 
 // Delete blog data by ID
-export const deleteHtmlBlog = async (req, res) => {
+export const deleteBlog = async (req, res) => {
   const { id } = req.params; // Get the blog post ID from the URL params
 
   try {
