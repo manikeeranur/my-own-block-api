@@ -52,10 +52,6 @@ export const getProfile = async (req, res) => {
 };
 
 export default function checkAuth(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res
