@@ -50,3 +50,30 @@ export const getProfile = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+export default function checkAuth(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res
+      .status(401)
+      .json({ isValid: false, message: "No token provided" });
+  }
+
+  try {
+    const secretKey = process.env.JWT_SECRET;
+    if (!secretKey) {
+      throw new Error("JWT_SECRET is missing in environment variables.");
+    }
+
+    jwt.verify(token, secretKey);
+    return res.status(200).json({ isValid: true });
+  } catch (error) {
+    return res
+      .status(403)
+      .json({ isValid: false, message: "Invalid or expired token" });
+  }
+}
