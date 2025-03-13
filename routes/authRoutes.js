@@ -11,6 +11,6 @@ const authRoutes = express.Router();
 authRoutes.post("/signup", signup);
 authRoutes.post("/login", login);
 authRoutes.get("/profile", authenticateJWT, getProfile);
-authRoutes.get("/checkAuth", checkAuth);
+authRoutes.post("/checkAuth", checkAuth);
 
 export default authRoutes;
