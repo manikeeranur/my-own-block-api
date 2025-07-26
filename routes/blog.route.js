@@ -27,7 +27,7 @@ blogRouter.get("/java", getJavaBlogOnly);
 
 blogRouter.get("/", getAllBlog);
 blogRouter.post("/", authenticateJWT, postBlog);
-blogRouter.get("/blog/:id", getBlogById);
+blogRouter.get("/:id", getBlogById);
 blogRouter.put("/:id", putBlog);
 blogRouter.delete("/:id", deleteBlog);
 
