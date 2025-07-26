@@ -11,6 +11,7 @@ import {
   postBlog,
   putBlog,
   deleteBlog,
+  getBlogById,
 } from "../controller/blog.controller.js";
 import authenticateJWT from "../middleware/authMiddleware.js";
 
@@ -26,6 +27,7 @@ blogRouter.get("/java", getJavaBlogOnly);
 
 blogRouter.get("/", getAllBlog);
 blogRouter.post("/", authenticateJWT, postBlog);
+blogRouter.get("/blog/:id", getBlogById);
 blogRouter.put("/:id", putBlog);
 blogRouter.delete("/:id", deleteBlog);
 

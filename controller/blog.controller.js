@@ -154,3 +154,19 @@ export const deleteBlog = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
+
+export const getBlogById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const blog = await htmlBlogModel.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    return res.status(200).json(blog);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
