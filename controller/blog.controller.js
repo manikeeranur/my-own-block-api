@@ -176,11 +176,11 @@ export const SearchBlogHeading = async (req, res) => {
     const { contentType = "", search = "" } = req.query;
 
     const query = {
-      contentType: contentType,
+      contentType: { $regex: new RegExp(contentType, "i") }, // case-insensitive match for contentType
       $or: [
-        { heading: { $regex: search, $options: "i" } },
+        { heading: { $regex: search, $options: "i" } }, // includes-style match
         { description: { $regex: search, $options: "i" } },
-        { content: { $regex: search, $options: "i" } }, // Optional: if full blog content is searchable
+        { content: { $regex: search, $options: "i" } },
       ],
     };
 
