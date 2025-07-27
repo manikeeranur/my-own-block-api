@@ -27,41 +27,41 @@ export const getCssBlogOnly = async (req, res) => {
   }
 };
 
-// export const getJavascriptBlogOnly = async (req, res) => {
-//   try {
-//     const data = await htmlBlogModel.find({ contentType: "Javascript" });
-//     return res.status(200).json(data);
-//   } catch (error) {
-//     return res.status(400).json({ message: error.message });
-//   }
-// };
-
 export const getJavascriptBlogOnly = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1; // Default page is 1
-    const limit = parseInt(req.query.limit) || 10; // Default limit is 10
-    const skip = (page - 1) * limit; // Calculate the number of documents to skip
-
-    const data = await htmlBlogModel
-      .find({ contentType: "Javascript" })
-      .skip(skip)
-      .limit(limit);
-
-    const total = await htmlBlogModel.countDocuments({
-      contentType: "Javascript",
-    }); // Total count of JavaScript blogs
-    const totalPages = Math.ceil(total / limit);
-
-    return res.status(200).json({
-      page,
-      totalPages,
-      totalItems: total,
-      data,
-    });
+    const data = await htmlBlogModel.find({ contentType: "Javascript" });
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 };
+
+// export const getJavascriptBlogOnly = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) || 1; // Default page is 1
+//     const limit = parseInt(req.query.limit) || 10; // Default limit is 10
+//     const skip = (page - 1) * limit; // Calculate the number of documents to skip
+
+//     const data = await htmlBlogModel
+//       .find({ contentType: "Javascript" })
+//       .skip(skip)
+//       .limit(limit);
+
+//     const total = await htmlBlogModel.countDocuments({
+//       contentType: "Javascript",
+//     }); // Total count of JavaScript blogs
+//     const totalPages = Math.ceil(total / limit);
+
+//     return res.status(200).json({
+//       page,
+//       totalPages,
+//       totalItems: total,
+//       data,
+//     });
+//   } catch (error) {
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 
 export const getBootstrapBlogOnly = async (req, res) => {
   try {
