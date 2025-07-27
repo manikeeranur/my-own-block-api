@@ -170,3 +170,23 @@ export const getBlogById = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
+
+export const SearchBlogHeading = async (req, res) => {
+  try {
+    const { contentType = "", search = "" } = req.query;
+
+    const query = {
+      contentType: contentType,
+      $or: [
+        { heading: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { content: { $regex: search, $options: "i" } }, // Optional: if full blog content is searchable
+      ],
+    };
+
+    const data = await htmlBlogModel.find(query);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
