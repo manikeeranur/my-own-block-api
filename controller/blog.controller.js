@@ -98,6 +98,14 @@ export const getJavaBlogOnly = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
+export const getFEInterviewQuestions = async (req, res) => {
+  try {
+    const data = await htmlBlogModel.find({ contentType: "FE_Interview" });
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 export const postBlog = async (req, res) => {
   const newHtmlBlog = new htmlBlogModel({
